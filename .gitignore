@@ -1,8 +1,8 @@
 # Builds
 build/
 
-# Google Tests
-tests/lib/
+# third_lib like google
+third_lib/googletest
 
 # Jet Brains
 .idea/

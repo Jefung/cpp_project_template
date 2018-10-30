@@ -1,27 +1,33 @@
 cmake_minimum_required(VERSION 3.9)
-project(MyProject)
+project(ProjectName)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
-add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
-
-include_directories(src)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(src)
 add_subdirectory(tests)
 
-target_link_libraries(${CMAKE_PROJECT_NAME}_run ${CMAKE_PROJECT_NAME}_lib)
+# 编译时如果找不到google库,自动去github下载到 项目根目录/third_lib/googletest
+set(GOOGLETEST_DIR ${CMAKE_SOURCE_DIR}/third_lib/googletest)
+if (NOT EXISTS ${GOOGLETEST_DIR})
+    find_package(Git REQUIRED)
+    execute_process(
+            COMMAND ${GIT_EXECUTABLE} clone https://github.com/google/googletest ${GOOGLETEST_DIR}
+    )
+endif ()
+add_subdirectory(third_lib/googletest)
 
-# Doxygen Build
+# Doxygen 构建(本人尚未使用,先空置)
 option(BUILD_DOC "Build Documentation" ON)
-
 find_package(Doxygen)
-if(DOXYGEN_FOUND)
+if (DOXYGEN_FOUND)
     set(BUILD_DOC_DIR ${CMAKE_SOURCE_DIR}/build/docs)
-    if(NOT EXISTS ${BUILD_DOC_DIR})
+    if (NOT EXISTS ${BUILD_DOC_DIR})
         file(MAKE_DIRECTORY ${BUILD_DOC_DIR})
-    endif()
+    endif ()
 
     set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -33,6 +39,6 @@ if(DOXYGEN_FOUND)
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Generating API documentation with Doxygen"
             VERBATIM)
-else(DOXYGEN_FOUND)
+else (DOXYGEN_FOUND)
     message("Doxygen needs to be installed to generate the documentation.")
-endif(DOXYGEN_FOUND)
+endif (DOXYGEN_FOUND)
