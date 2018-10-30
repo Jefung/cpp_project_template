@@ -25,6 +25,8 @@ git init
 rm new_cpp_project.sh
 rm README.md
 echo "# "${PROJECT_NAME} >> README.md
+sed -i 's/project(ProjectName)/'${PROJECT_NAME}'/g' CMakeLists.txt
+
 
 git add .
 git commit -m "init project "${PROJECT_NAME}
