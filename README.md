@@ -1,4 +1,8 @@
 # C++项目模板
+ps: 手动打字,如有错误(懒得多次检查),或者其他想法,bug欢迎在issue提出,thanks.
+## 学习链接:
+* cmake入门: [CMake 入门实战](http://www.hahack.com/codes/cmake/) 对应[源码](https://github.com/wzpan/cmake-demo)
+
 ## 简介
 快速建立一个基本的c++项目结构,加快开发
 
@@ -19,12 +23,12 @@
     ```bash
     ./new_cpp_project.sh 项目名
     ```
-    比如: 我执行了`./new_cpp_project.sh test`, 就会在该目录下生成一个`test`目录,里面是c++项目模板
+    比如: 我执行了`./new_cpp_project.sh test`, 就会在该目录下生成一个`test`目录,里面是c++项目模板,并帮你建立为一个新的repo
 
 ps:
-* 你的项目名会自动替换项目根目录下`CMakeLists.txt`第二行的`project(ProjectName)`为`project(项目名)`
-* 你生成的可执行文件名字为`项目名_run`(放在`cmake-build-debug/bin`下)
-* 你生成的库文件名字为`项目名.a`(放在`cmake-build-debug/lib`下)
+* 你输入的项目名会自动替换项目根目录下`CMakeLists.txt`第二行的`project(ProjectName)`为`project(项目名)`
+* 生成的可执行文件名字为`项目名_run`(放在`cmake-build-debug/bin`下)
+* 生成的库文件名字为`项目名.a`(放在`cmake-build-debug/lib`下)
 * 如果你想修改c++标准(默认为c++11),在顶层`CMakeLists.txt`的`set(CMAKE_CXX_STANDARD 11)`修改
 
 ## 目录结构
@@ -34,10 +38,12 @@ ps:
         当前src编译规则是单独编译`main.cpp`为`项目名_run`,将其他源文件(h/cpp)打包为`项目名.a`,
         并链接.
     * tests:
-        默认编译规则是编译`test_`开头的`.cpp`文件,入口文件是使用`googletest`提供的`gtest_main`入口文件.
+        默认编译规则是编译该目录下所有以`test_`开头的`.cpp`文件,入口文件是使用`googletest`提供的`gtest_main`入口文件.
         生成`Unit_Tests_run`可执行文件(放在`cmake-build-debug/bin`下)
     * third_lib:
-        使用的第三方库文件存放目录,`googletest`测试框架就放在这
+        使用的第三方库文件存放目录,`googletest`测试框架就放在这,默认是构建时自动下载,没有包含在该项目内
 
-## 配置Clion并使用
+## 配置Clion并测试使用(待完善:clion的操作截图,有空找纯洁环境配置下)
 ps: 每次增加/删除文件需要手动重新加载项目才能正确编译(待解决!)
+* 直接打开项目, 运行`tests/test_example.cpp`测试是否可以单元测试
+* 运行`src/main.cpp`测试是否可以正常运行
