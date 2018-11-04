@@ -6,9 +6,9 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 #    ${PROJECT_SOURCE_DIR} 是最近一个使用了project()函数的CMakeLists.txt所在目录
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src)
 
-# 将test_开头的文件视为单元测试文件
+# 将test_开头的文件视为单元测试文件, common.cpp是测试文件的共用文件(函数,类...)
 file(GLOB_RECURSE test_files "test_*.cpp")
-add_executable(Unit_Tests_run ${test_files})
+add_executable(Unit_Tests_run ${test_files} common.cpp)
 
 # 链接gtest的库
 target_link_libraries(Unit_Tests_run gtest gtest_main)
