@@ -22,9 +22,14 @@ rm .git -rf
 
 git init
 
+# 处理README.md
 rm new_cpp_project.sh
-rm README.md
-echo "# "${PROJECT_NAME} >> README.md
+line=`grep -n "分割线" README.md |cut -f1 -d:`
+line=$(($line + 1))
+tail -n +${line} README.md > new_README.md
+mv new_README.md README.md
+sed -i 's/项目名/${PROJECT_NAME}/g' README.md
+
 sed -i 's/project(ProjectName)/project('${PROJECT_NAME}')/g' CMakeLists.txt
 
 

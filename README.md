@@ -47,3 +47,41 @@ ps:
 ps: 每次增加/删除文件需要手动重新加载项目才能正确编译(待解决!)
 * 直接打开项目, 运行`tests/test_example.cpp`测试是否可以单元测试
 * 运行`src/main.cpp`测试是否可以正常运行
+
+## 小技巧:
+* 生成目录树:
+    * windows: 进入目的文件夹,执行 `tree . /F` (git-bash不可用,使用自带cmd)
+    * linux: 进入目的文件夹, 执行 `tree`
+-------------------------------- 分割线(以下会出现在新建项目的README.md) --------------------------------
+# 项目名
+## Todo
+```
+- [x] 以实现的功能
+- [ ] 待实现的功能
+```
+
+## 目录结构
+```bash
+├─docs : 项目文档相关资料
+│      Doxyfile
+├─cmake-build-debug
+│  │
+│  ├─lib : 默认生成库所在目录
+│  │
+│  └─bin : 默认可执行文件(项目的可执行文件,单元测试的可执行文件)所在目录
+│
+├─src : 源代码
+│      CMakeLists.txt
+│      main.cpp : 入口文件
+│
+├─tests : 单元测试
+│      CMakeLists.txt
+│      common.cpp
+│      common.h : 测试文件共用函数/类
+│      test_example.cpp : googletest的demo,方便写测试文件时可用
+│
+└─third_lib : 第三方库所在目录(如googletest)
+```
+
+## 如何使用?
+
