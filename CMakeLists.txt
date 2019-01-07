@@ -45,7 +45,8 @@ endif (DOXYGEN_FOUND)
 
 
 # 附上个人经常使用的配置
-## 加上boost编译
+
+## 对可执行程序链接boost库
 # find_package(Boost 1.58.0 COMPONENTS system filesystem REQUIRED)
 # include_directories(${Boost_INCLUDE_DIRS})
 # target_link_libraries(可执行文件名 ${Boost_LIBRARIES})
